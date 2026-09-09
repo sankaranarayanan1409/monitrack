@@ -75,11 +75,13 @@ fun ProgressScreen(viewModel: ProgressViewModel = viewModel()) {
             }
 
             val emptyText = stringResource(R.string.no_measurements)
+            val singlePointText = stringResource(R.string.not_enough_measurements)
             LineChart(
                 title = stringResource(R.string.chart_weight),
                 entries = measurements.toEntries(range) { it.weightKg },
                 lineColor = ExerciseAccent,
                 emptyText = emptyText,
+                singlePointText = singlePointText,
             )
             if (bodyFatEnabled) {
                 LineChart(
@@ -87,12 +89,14 @@ fun ProgressScreen(viewModel: ProgressViewModel = viewModel()) {
                     entries = measurements.toEntries(range) { it.bodyFatPercent },
                     lineColor = WorkAccent,
                     emptyText = emptyText,
+                    singlePointText = singlePointText,
                 )
                 LineChart(
                     title = stringResource(R.string.chart_waist),
                     entries = measurements.toEntries(range) { it.waistCm },
                     lineColor = WaistAccent,
                     emptyText = emptyText,
+                    singlePointText = singlePointText,
                 )
                 if (profile?.sex == Sex.FEMALE) {
                     LineChart(
@@ -100,6 +104,7 @@ fun ProgressScreen(viewModel: ProgressViewModel = viewModel()) {
                         entries = measurements.toEntries(range) { it.hipCm },
                         lineColor = SleepAccent,
                         emptyText = emptyText,
+                        singlePointText = singlePointText,
                     )
                 }
             }
@@ -108,6 +113,7 @@ fun ProgressScreen(viewModel: ProgressViewModel = viewModel()) {
                 entries = measurements.toEntries(range) { it.neckCm },
                 lineColor = Violet,
                 emptyText = emptyText,
+                singlePointText = singlePointText,
             )
         }
     }

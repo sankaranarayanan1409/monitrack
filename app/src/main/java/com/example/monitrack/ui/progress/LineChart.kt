@@ -26,15 +26,16 @@ fun LineChart(
     entries: List<ChartEntry>,
     lineColor: Color,
     emptyText: String,
+    singlePointText: String,
     modifier: Modifier = Modifier,
 ) {
     Card(modifier = modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {
             Text(title, style = MaterialTheme.typography.titleSmall)
 
-            if (entries.isEmpty()) {
+            if (entries.isEmpty() || entries.size == 1) {
                 Text(
-                    text = emptyText,
+                    text = if (entries.isEmpty()) emptyText else singlePointText,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(vertical = 24.dp),

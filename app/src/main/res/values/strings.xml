@@ -83,6 +83,7 @@
     <string name="chart_waist">Waist (cm)</string>
     <string name="chart_hip">Hip (cm)</string>
     <string name="no_measurements">No measurements in this range yet.</string>
+    <string name="not_enough_measurements">Add another measurement to see a trend.</string>
     <string name="measurement_date">Date</string>
     <string name="measurement_weight">Weight (kg)</string>
     <string name="measurement_neck">Neck (cm)</string>
