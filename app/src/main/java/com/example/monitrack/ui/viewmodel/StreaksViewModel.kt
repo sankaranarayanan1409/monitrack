@@ -35,7 +35,7 @@ class StreaksViewModel(application: Application) : AndroidViewModel(application)
                 } else {
                     combine(
                         streakable.map { item ->
-                            repository.completedSessions(item.activity.name)
+                            repository.completedSessions(item.activity.id)
                                 .map { sessions -> item to sessions }
                         },
                     ) { pairs ->

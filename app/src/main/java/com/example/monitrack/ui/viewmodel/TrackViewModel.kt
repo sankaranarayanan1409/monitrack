@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.monitrack.data.entity.ActivityConfig
 import com.example.monitrack.data.enums.Sex
 import com.example.monitrack.data.relation.ActivityWithConfig
+import com.example.monitrack.data.util.ActivityIcons
 import com.example.monitrack.data.util.Metrics
 import com.example.monitrack.reminder.ReminderScheduler
 import com.example.monitrack.repository
@@ -21,6 +22,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 
 data class ActivityUiState(
+    val activityId: Long,
     val name: String,
     @DrawableRes val icon: Int?,
     val config: ActivityConfig?,
@@ -65,14 +67,15 @@ class TrackViewModel(application: Application) : AndroidViewModel(application) {
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
 
     private fun stateFor(item: ActivityWithConfig) = combine(
-        repository.activeSession(item.activity.name),
-        repository.completedSessions(item.activity.name),
+        repository.activeSession(item.activity.id),
+        repository.completedSessions(item.activity.id),
     ) { active, completed ->
         val today = LocalDate.now(zone)
         val config = item.config
         ActivityUiState(
+            activityId = item.activity.id,
             name = item.activity.name,
-            icon = item.activity.icon,
+            icon = ActivityIcons.resolve(item.activity.icon),
             config = config,
             runningSessionId = active?.id,
             runningSince = active?.startTime,
@@ -81,8 +84,8 @@ class TrackViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
-    fun start(name: String) = viewModelScope.launch {
-        val id = repository.startSession(name, System.currentTimeMillis())
+    fun start(activityId: Long, name: String) = viewModelScope.launch {
+        val id = repository.startSession(activityId, name, System.currentTimeMillis())
         repository.getSession(id)?.let { ReminderScheduler.schedule(getApplication(), repository, it) }
     }
 

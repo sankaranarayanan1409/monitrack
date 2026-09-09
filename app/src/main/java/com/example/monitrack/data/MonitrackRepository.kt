@@ -24,20 +24,21 @@ class MonitrackRepository(
     // Activities (name + icon; source of truth joined with config)
     fun activitiesWithConfig(): Flow<List<ActivityWithConfig>> = activityDao.activitiesWithConfig()
     suspend fun getActivitiesNow(): List<Activity> = activityDao.getAllNow()
+    suspend fun getActivity(id: Long): Activity? = activityDao.getById(id)
 
-    // Sessions
-    fun activeSession(type: String): Flow<Session?> = sessionDao.activeSession(type)
+    // Sessions (keyed by activityId, not name, so a rename never orphans history)
+    fun activeSession(activityId: Long): Flow<Session?> = sessionDao.activeSession(activityId)
 
-    fun completedSessions(type: String): Flow<List<Session>> =
-        sessionDao.completedSessions(type)
+    fun completedSessions(activityId: Long): Flow<List<Session>> =
+        sessionDao.completedSessions(activityId)
 
-    suspend fun completedSessionsNow(type: String): List<Session> =
-        sessionDao.completedSessionsNow(type)
+    suspend fun completedSessionsNow(activityId: Long): List<Session> =
+        sessionDao.completedSessionsNow(activityId)
 
     suspend fun getSession(id: Long): Session? = sessionDao.getById(id)
 
-    suspend fun startSession(type: String, startTime: Long): Long =
-        sessionDao.insert(Session(type = type, startTime = startTime))
+    suspend fun startSession(activityId: Long, name: String, startTime: Long): Long =
+        sessionDao.insert(Session(activityId = activityId, type = name, startTime = startTime))
 
     suspend fun stopSession(id: Long, endTime: Long, manuallyAdjusted: Boolean) {
         val session = sessionDao.getById(id) ?: return
@@ -51,10 +52,11 @@ class MonitrackRepository(
         if (session.isRunning) sessionDao.delete(session)
     }
 
-    // Activity configuration
-    fun configFlow(type: String): Flow<ActivityConfig?> = activityConfigDao.configFlow(type)
+    // Activity configuration (keyed by activityId, not name)
+    fun configFlow(activityId: Long): Flow<ActivityConfig?> = activityConfigDao.configFlow(activityId)
     fun allConfigs(): Flow<List<ActivityConfig>> = activityConfigDao.allConfigs()
-    suspend fun getConfig(type: String): ActivityConfig? = activityConfigDao.getConfig(type)
+    suspend fun getConfig(activityId: Long): ActivityConfig? = activityConfigDao.getConfig(activityId)
+    suspend fun getConfigById(id: Int): ActivityConfig? = activityConfigDao.getConfigById(id)
     suspend fun getAllConfigs(): List<ActivityConfig> = activityConfigDao.getAllConfigs()
     suspend fun saveConfig(config: ActivityConfig) = activityConfigDao.upsert(config)
     suspend fun saveConfigs(configs: List<ActivityConfig>) = activityConfigDao.upsert(configs)

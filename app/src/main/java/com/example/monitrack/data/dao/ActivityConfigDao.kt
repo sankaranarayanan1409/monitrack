@@ -14,14 +14,17 @@ interface ActivityConfigDao {
     @Upsert
     suspend fun upsert(config: ActivityConfig)
 
-    @Query("SELECT * FROM activity_config WHERE type = :type")
-    fun configFlow(type: String): Flow<ActivityConfig?>
+    @Query("SELECT * FROM activity_config WHERE activityId = :activityId")
+    fun configFlow(activityId: Long): Flow<ActivityConfig?>
 
     @Query("SELECT * FROM activity_config")
     fun allConfigs(): Flow<List<ActivityConfig>>
 
-    @Query("SELECT * FROM activity_config WHERE type = :type")
-    suspend fun getConfig(type: String): ActivityConfig?
+    @Query("SELECT * FROM activity_config WHERE activityId = :activityId")
+    suspend fun getConfig(activityId: Long): ActivityConfig?
+
+    @Query("SELECT * FROM activity_config WHERE id = :id")
+    suspend fun getConfigById(id: Int): ActivityConfig?
 
     @Query("SELECT * FROM activity_config")
     suspend fun getAllConfigs(): List<ActivityConfig>

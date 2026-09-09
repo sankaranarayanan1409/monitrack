@@ -40,15 +40,15 @@ import java.time.format.FormatStyle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HistoryScreen(type: String, onBack: () -> Unit) {
+fun HistoryScreen(activityId: Long, name: String, onBack: () -> Unit) {
     val repository = LocalContext.current.repository
-    val sessions by remember(type) { repository.completedSessions(type) }.collectAsState(initial = emptyList())
-    val config by remember(type) { repository.configFlow(type) }.collectAsState(initial = null)
+    val sessions by remember(activityId) { repository.completedSessions(activityId) }.collectAsState(initial = emptyList())
+    val config by remember(activityId) { repository.configFlow(activityId) }.collectAsState(initial = null)
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.history_title, type)) },
+                title = { Text(stringResource(R.string.history_title, name)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(painterResource(R.drawable.ic_back), contentDescription = stringResource(R.string.cancel))

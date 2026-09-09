@@ -57,7 +57,7 @@ object ReminderNotifier {
     }
 
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
-    fun showDailyNudge(context: Context, config: ActivityConfig, totalMs: Long) {
+    fun showDailyNudge(context: Context, activityName: String, config: ActivityConfig, totalMs: Long) {
         val openApp = PendingIntent.getActivity(
             context,
             NUDGE_ID_BASE + config.id,
@@ -66,7 +66,7 @@ object ReminderNotifier {
         )
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(context.getString(R.string.nudge_title, config.type))
+            .setContentTitle(context.getString(R.string.nudge_title, activityName))
             .setContentText(
                 context.getString(
                     R.string.nudge_text,

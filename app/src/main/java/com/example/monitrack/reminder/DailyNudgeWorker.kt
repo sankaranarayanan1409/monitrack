@@ -18,20 +18,23 @@ class DailyNudgeWorker(
 
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     override suspend fun doWork(): Result {
-        val type = inputData.getString(KEY_NUDGE_TYPE) ?: return Result.failure()
+        val configId = inputData.getInt(KEY_NUDGE_CONFIG_ID, -1)
+        if (configId < 0) return Result.failure()
 
         val repository = applicationContext.repository
-        val config = repository.getConfig(type) ?: return Result.success()
+        val config = repository.getConfigById(configId) ?: return Result.success()
+        val activityId = config.activityId ?: return Result.success()
 
         if (config.dailyNudgeEnabled) {
             val today = LocalDate.now(ZoneId.systemDefault())
             val total = Metrics.dailyTotalMs(
-                repository.completedSessionsNow(type),
+                repository.completedSessionsNow(activityId),
                 today,
                 ZoneId.systemDefault(),
             )
             if (total < config.targetMs) {
-                ReminderNotifier.showDailyNudge(applicationContext, config, total)
+                val activityName = repository.getActivity(activityId)?.name ?: config.type
+                ReminderNotifier.showDailyNudge(applicationContext, activityName, config, total)
             }
             // Reschedule for the next day's nudge time.
             DailyNudgeScheduler.schedule(applicationContext, config)

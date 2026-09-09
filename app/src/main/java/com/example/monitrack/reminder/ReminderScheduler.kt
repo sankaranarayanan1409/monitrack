@@ -25,7 +25,7 @@ object ReminderScheduler {
 
     /** Schedule the first reminder. No-op when the activity has overrun alerts disabled. */
     suspend fun schedule(context: Context, repository: MonitrackRepository, session: Session) {
-        val config = repository.getConfig(session.type) ?: return
+        val config = repository.getConfig(session.activityId) ?: return
         if (!config.overrunAlertEnabled) return
         val threshold = (config.targetMs * OVERRUN_FACTOR).toLong()
         val elapsed = System.currentTimeMillis() - session.startTime

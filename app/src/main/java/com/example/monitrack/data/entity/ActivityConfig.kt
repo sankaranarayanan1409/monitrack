@@ -1,11 +1,9 @@
 package com.example.monitrack.data.entity
 
-import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.monitrack.R
 import java.time.LocalTime
 
 @Entity(
@@ -35,9 +33,7 @@ data class ActivityConfig(
     val streakEnabled: Boolean,
     /** ARGB color for the streak contribution grid. */
     val streakColor: Int,
-    @DrawableRes
-    val icon: Int? = null,
-    /** FK to [Activity]. Scaffold link — not populated by the app yet. */
+    /** FK to [Activity], set once at setup by matching [type] to [Activity.name]. */
     val activityId: Long? = null,
 ) {
     val targetMs: Long get() = targetMinutes * 60_000L
@@ -55,7 +51,6 @@ data class ActivityConfig(
                 overrunAlertEnabled = false,
                 streakEnabled = true,
                 streakColor = 0xFF8A7CA8.toInt(),
-                icon = R.drawable.ic_sleep
             ),
             ActivityConfig(
                 type = "Work",
@@ -67,7 +62,6 @@ data class ActivityConfig(
                 overrunAlertEnabled = true,
                 streakEnabled = false,
                 streakColor = 0xFFC8873C.toInt(),
-                icon = R.drawable.ic_work
             ),
             ActivityConfig(
                 type = "Exercise",
@@ -79,7 +73,6 @@ data class ActivityConfig(
                 overrunAlertEnabled = true,
                 streakEnabled = true,
                 streakColor = 0xFFB5643C.toInt(),
-                icon = R.drawable.ic_exercise
             ),
         )
     }

@@ -22,6 +22,9 @@ interface ActivityDao {
     @Query("SELECT COUNT(*) FROM activities")
     suspend fun count(): Int
 
+    @Query("SELECT * FROM activities WHERE id = :id")
+    suspend fun getById(id: Long): Activity?
+
     /** Each activity joined with its config, ordered for a stable carousel/list. */
     @Transaction
     @Query("SELECT * FROM activities ORDER BY id")

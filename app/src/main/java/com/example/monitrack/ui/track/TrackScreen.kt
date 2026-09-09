@@ -37,7 +37,7 @@ import com.example.monitrack.ui.viewmodel.TrackViewModel
 @Composable
 fun TrackScreen(
     onOpenSettings: () -> Unit,
-    onOpenHistory: (String) -> Unit,
+    onOpenHistory: (Long, String) -> Unit,
     viewModel: TrackViewModel = viewModel(),
 ) {
     val activities by viewModel.activities.collectAsState()
@@ -77,10 +77,10 @@ fun TrackScreen(
                     val state = activities[page]
                     ActivityPage(
                         state = state,
-                        onStart = { viewModel.start(state.name) },
+                        onStart = { viewModel.start(state.activityId, state.name) },
                         onStop = { stopping = state },
                         onCancel = { cancelling = state },
-                        onOpenHistory = { onOpenHistory(state.name) },
+                        onOpenHistory = { onOpenHistory(state.activityId, state.name) },
                     )
                 }
                 PagerDots(count = activities.size, selected = pagerState.currentPage)

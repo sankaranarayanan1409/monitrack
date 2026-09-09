@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.concurrent.TimeUnit
 
-const val KEY_NUDGE_TYPE = "nudge_type"
+const val KEY_NUDGE_CONFIG_ID = "nudge_config_id"
 
 /** Schedules the once-a-day "you haven't met your target" nudge per activity. */
 object DailyNudgeScheduler {
@@ -24,7 +24,7 @@ object DailyNudgeScheduler {
     /** Enqueue (or cancel) the next nudge check for one activity based on its config. */
     fun schedule(context: Context, config: ActivityConfig) {
         if (!config.dailyNudgeEnabled) {
-            cancel(context, config.type)
+            cancel(context, config.id)
             return
         }
         val zone = ZoneId.systemDefault()
@@ -36,13 +36,13 @@ object DailyNudgeScheduler {
 
         val request = OneTimeWorkRequestBuilder<DailyNudgeWorker>()
             .setInitialDelay(delayMs.coerceAtLeast(0), TimeUnit.MILLISECONDS)
-            .setInputData(workDataOf(KEY_NUDGE_TYPE to config.type))
+            .setInputData(workDataOf(KEY_NUDGE_CONFIG_ID to config.id))
             .build()
         WorkManager.getInstance(context)
-            .enqueueUniqueWork(WORK_PREFIX + config.type, ExistingWorkPolicy.REPLACE, request)
+            .enqueueUniqueWork(WORK_PREFIX + config.id, ExistingWorkPolicy.REPLACE, request)
     }
 
-    fun cancel(context: Context, type: String) {
-        WorkManager.getInstance(context).cancelUniqueWork(WORK_PREFIX + type)
+    fun cancel(context: Context, configId: Int) {
+        WorkManager.getInstance(context).cancelUniqueWork(WORK_PREFIX + configId)
     }
 }
