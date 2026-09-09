@@ -2,37 +2,45 @@ package com.example.monitrack.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Warm, nurturing palette — terracotta, amber, cream, sage.
-val Terracotta = Color(0xFFB5643C)
-val TerracottaLight = Color(0xFFE9A987)
-val SoftPeach = Color(0xFFF3D9CB)
-val DeepClay = Color(0xFF4A2410)
+// Palette lifted from the app icon: slate ground, indigo/violet header, emerald-cyan
+// and sky-indigo dials, amber highlight.
+val Indigo = Color(0xFF6366F1)
+val IndigoLight = Color(0xFFA5B4FC)
+val IndigoDeep = Color(0xFF1E1B4B)
+val Violet = Color(0xFF8B5CF6)
 
-val WarmAmber = Color(0xFFC8873C)
-val WarmAmberLight = Color(0xFFF0CFA0)
-val AmberDeep = Color(0xFF4A3212)
+val Emerald = Color(0xFF10B981)
+val EmeraldLight = Color(0xFFA7F3D0)
+val Cyan = Color(0xFF06B6D4)
+val Sky = Color(0xFF38BDF8)
 
-val Sage = Color(0xFF7A8B6F)
-val SageLight = Color(0xFFD9E2CF)
+val Amber = Color(0xFFF59E0B)
+val AmberLight = Color(0xFFFDE68A)
+val AmberDeep = Color(0xFF451A03)
 
-val Cream = Color(0xFFFDF6EF)
-val CreamSurface = Color(0xFFFFFBF6)
-val SandVariant = Color(0xFFEFE1D5)
-val WarmBrown = Color(0xFF3A2E27)
-val WarmGrey = Color(0xFF6F5F55)
+// Light ground.
+val SlateSurface = Color(0xFFFFFFFF)
+val SlateBackground = Color(0xFFF8FAFC)
+val SlateVariant = Color(0xFFE2E8F0)
+val SlateInk = Color(0xFF0F172A)
+val SlateInkMuted = Color(0xFF475569)
 
-// Dark theme warm tones.
-val DarkBackground = Color(0xFF211A16)
-val DarkSurface = Color(0xFF2A211C)
-val DarkSurfaceVariant = Color(0xFF473B33)
-val CreamOnDark = Color(0xFFEFE0D6)
+// Dark ground.
+val SlateDeep = Color(0xFF0F172A)
+val SlateDark = Color(0xFF1E293B)
+val SlateMid = Color(0xFF334155)
+val SlateOnDark = Color(0xFFF8FAFC)
 
-// Per-activity accents (all within the warm family).
-val SleepAccent = Color(0xFF8A7CA8) // muted dusk lilac
-val WorkAccent = WarmAmber
-val ExerciseAccent = Terracotta
+// Gauge feedback.
+val HealthyGreen = Color(0xFF10B981)
+val AlertRed = Color(0xFFEF4444)
+
+// Per-activity accents, matching the icon's own symbols.
+val SleepAccent = Sky
+val WorkAccent = Amber
+val ExerciseAccent = Emerald
 
 // Extra measurement-chart accent.
-val WaistAccent = Color(0xFF4C8577) // muted teal
+val WaistAccent = Cyan
 
-val DefaultAccent = Color(0xFF8A9A72)
+val DefaultAccent = Violet

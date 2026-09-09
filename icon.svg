@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+
+    <!-- Calendar Accent Gradient -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+
+    <!-- Ring Track Gradient (Exercise / Sleep / Work) -->
+    <linearGradient id="exerciseGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+
+    <linearGradient id="sleepGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+
+    <!-- Subtle Shadows -->
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Base Calendar Page (Appointment) -->
+  <g filter="url(#dropShadow)">
+    <rect x="36" y="44" width="184" height="184" rx="28" fill="url(#bgGrad)" stroke="#334155" stroke-width="2" />
+    <path d="M 36 72 C 36 56.5 48.5 44 64 44 L 192 44 C 207.5 44 220 56.5 220 72 L 220 84 L 36 84 Z" fill="url(#headerGrad)" />
+  </g>
+
+  <!-- Calendar Binder Rings -->
+  <rect x="72" y="32" width="10" height="24" rx="5" fill="#f8fafc" />
+  <rect x="174" y="32" width="10" height="24" rx="5" fill="#f8fafc" />
+
+  <!-- Central Multi-Track Dial (Activity / Body Composition Tracker) -->
+  <!-- Outer Metric Track: Exercise & Vitals Progress -->
+  <circle cx="128" cy="154" r="54" fill="none" stroke="#334155" stroke-width="6" opacity="0.6" />
+  <path d="M 128 100 A 54 54 0 1 1 79 179" fill="none" stroke="url(#exerciseGrad)" stroke-width="6" stroke-linecap="round" />
+
+  <!-- Inner Metric Track: Work / Schedule Balance -->
+  <circle cx="128" cy="154" r="42" fill="none" stroke="#334155" stroke-width="5" opacity="0.4" />
+  <path d="M 128 112 A 42 42 0 1 1 98 124" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round" />
+
+  <!-- SLEEP TRACKER: Crescent Moon (Top-Left Quad) -->
+  <path d="M 98 126 C 96 126 91 120 93 113 C 94 110 97 108 97 108 C 95 109 91 112 91 117 C 91 123 96 128 102 128 C 105 128 108 126 109 125 C 107 126 102 127 98 126 Z" 
+        fill="url(#sleepGrad)" />
+
+  <!-- WORKING HOURS: Clock Hands (Center) -->
+  <line x1="128" y1="154" x2="128" y2="134" stroke="#f8fafc" stroke-width="3.5" stroke-linecap="round" />
+  <line x1="128" y1="154" x2="144" y2="154" stroke="#f8fafc" stroke-width="3" stroke-linecap="round" />
+  <circle cx="128" cy="154" r="3.5" fill="#f8fafc" />
+
+  <!-- EXERCISE & BODY METRICS: Pulse + Caliper/Delta Peak (Bottom-Right) -->
+  <path d="M 112 176 L 120 176 L 124 168 L 132 184 L 137 172 L 141 176 L 148 176" 
+        fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

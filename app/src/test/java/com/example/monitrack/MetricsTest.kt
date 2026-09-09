@@ -120,4 +120,16 @@ class MetricsTest {
     fun `body fat is null when waist not greater than neck`() {
         assertNull(Metrics.bodyFatNavy(Sex.MALE, 180.0, 40.0, 40.0, hipCm = null))
     }
+
+    @Test
+    fun `bmi matches reference`() {
+        assertEquals(22.9, Metrics.bmi(weightKg = 70.0, heightCm = 175.0)!!, 0.05)
+    }
+
+    @Test
+    fun `bmi is null for missing or non-positive inputs`() {
+        assertNull(Metrics.bmi(weightKg = null, heightCm = 175.0))
+        assertNull(Metrics.bmi(weightKg = 70.0, heightCm = null))
+        assertNull(Metrics.bmi(weightKg = 0.0, heightCm = 175.0))
+    }
 }

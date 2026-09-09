@@ -28,7 +28,7 @@ import com.example.monitrack.R
 import com.example.monitrack.data.entity.BodyMeasurement
 import com.example.monitrack.data.enums.Sex
 import com.example.monitrack.ui.theme.ExerciseAccent
-import com.example.monitrack.ui.theme.Sage
+import com.example.monitrack.ui.theme.Violet
 import com.example.monitrack.ui.theme.SleepAccent
 import com.example.monitrack.ui.theme.WaistAccent
 import com.example.monitrack.ui.theme.WorkAccent
@@ -106,7 +106,7 @@ fun ProgressScreen(viewModel: ProgressViewModel = viewModel()) {
             LineChart(
                 title = stringResource(R.string.chart_neck),
                 entries = measurements.toEntries(range) { it.neckCm },
-                lineColor = Sage,
+                lineColor = Violet,
                 emptyText = emptyText,
             )
         }

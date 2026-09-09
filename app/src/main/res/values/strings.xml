@@ -90,4 +90,10 @@
     <string name="measurement_hip">Hip (cm)</string>
     <string name="hip_required_female">Hip is required to calculate body fat for females.</string>
     <string name="body_fat_computed">Body fat: %1$s%%</string>
+
+    <!-- Body composition gauges -->
+    <string name="body_composition">Body composition</string>
+    <string name="metric_bmi">BMI</string>
+    <string name="metric_body_fat">Body fat</string>
+    <string name="healthy_range">Healthy %1$s\u2013%2$s</string>
 </resources>

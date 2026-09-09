@@ -41,6 +41,7 @@ fun TrackScreen(
     viewModel: TrackViewModel = viewModel(),
 ) {
     val activities by viewModel.activities.collectAsState()
+    val bodyComposition by viewModel.bodyComposition.collectAsState()
     var stopping by remember { mutableStateOf<ActivityUiState?>(null) }
     var cancelling by remember { mutableStateOf<ActivityUiState?>(null) }
 
@@ -59,25 +60,31 @@ fun TrackScreen(
             )
         },
     ) { innerPadding ->
-        if (activities.isEmpty()) return@Scaffold
-
         val pagerState = rememberPagerState(pageCount = { activities.size })
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
         ) {
-            HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
-                val state = activities[page]
-                ActivityPage(
+            bodyComposition?.let { state ->
+                BodyCompositionCard(
                     state = state,
-                    onStart = { viewModel.start(state.name) },
-                    onStop = { stopping = state },
-                    onCancel = { cancelling = state },
-                    onOpenHistory = { onOpenHistory(state.name) },
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                 )
             }
-            PagerDots(count = activities.size, selected = pagerState.currentPage)
+            if (activities.isNotEmpty()) {
+                HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
+                    val state = activities[page]
+                    ActivityPage(
+                        state = state,
+                        onStart = { viewModel.start(state.name) },
+                        onStop = { stopping = state },
+                        onCancel = { cancelling = state },
+                        onOpenHistory = { onOpenHistory(state.name) },
+                    )
+                }
+                PagerDots(count = activities.size, selected = pagerState.currentPage)
+            }
         }
     }
 

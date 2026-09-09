@@ -73,6 +73,14 @@ object Metrics {
         return count
     }
 
+    /** Body mass index (kg/m2). Returns null when weight or height is missing or non-positive. */
+    fun bmi(weightKg: Double?, heightCm: Double?): Double? {
+        if (weightKg == null || heightCm == null) return null
+        if (weightKg <= 0 || heightCm <= 0) return null
+        val heightM = heightCm / 100.0
+        return weightKg / (heightM * heightM)
+    }
+
     /**
      * US Navy body-fat estimate (percent). Returns null when required inputs are missing
      * or non-positive. Hip is required for females only.

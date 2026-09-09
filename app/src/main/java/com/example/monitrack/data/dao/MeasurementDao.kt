@@ -14,4 +14,7 @@ interface MeasurementDao {
 
     @Query("SELECT * FROM measurements WHERE date BETWEEN :start AND :end ORDER BY date")
     fun measurementsBetween(start: LocalDate, end: LocalDate): Flow<List<BodyMeasurement>>
+
+    @Query("SELECT * FROM measurements ORDER BY date DESC LIMIT 1")
+    fun latestMeasurement(): Flow<BodyMeasurement?>
 }

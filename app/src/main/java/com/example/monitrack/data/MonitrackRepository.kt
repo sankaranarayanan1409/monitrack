@@ -68,6 +68,8 @@ class MonitrackRepository(
     fun measurementsBetween(start: LocalDate, end: LocalDate): Flow<List<BodyMeasurement>> =
         measurementDao.measurementsBetween(start, end)
 
+    fun latestMeasurement(): Flow<BodyMeasurement?> = measurementDao.latestMeasurement()
+
     suspend fun addMeasurement(measurement: BodyMeasurement): Long =
         measurementDao.insert(measurement)
 }
