@@ -1,58 +1,64 @@
 package com.example.monitrack.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+private val LightColors = lightColorScheme(
+    primary = Terracotta,
+    onPrimary = Color.White,
+    primaryContainer = SoftPeach,
+    onPrimaryContainer = DeepClay,
+    secondary = WarmAmber,
+    onSecondary = Color.White,
+    secondaryContainer = WarmAmberLight,
+    onSecondaryContainer = AmberDeep,
+    tertiary = Sage,
+    tertiaryContainer = SageLight,
+    background = Cream,
+    onBackground = WarmBrown,
+    surface = CreamSurface,
+    onSurface = WarmBrown,
+    surfaceVariant = SandVariant,
+    onSurfaceVariant = WarmGrey,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+private val DarkColors = darkColorScheme(
+    primary = TerracottaLight,
+    onPrimary = DeepClay,
+    primaryContainer = Terracotta,
+    onPrimaryContainer = SoftPeach,
+    secondary = WarmAmberLight,
+    onSecondary = AmberDeep,
+    tertiary = Sage,
+    background = DarkBackground,
+    onBackground = CreamOnDark,
+    surface = DarkSurface,
+    onSurface = CreamOnDark,
+    surfaceVariant = DarkSurfaceVariant,
+    onSurfaceVariant = SoftPeach,
 )
 
 @Composable
 fun MonitrackTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
+    // Dynamic color is intentionally disabled so the curated warm palette always applies.
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = if (darkTheme) DarkColors else LightColors,
         typography = Typography,
-        content = content
+        content = content,
     )
+}
+
+/** The warm accent color assigned to each tracked activity. */
+fun accentFor(type: String): Color = when (type) {
+    "Sleep"-> SleepAccent
+    "Work" -> WorkAccent
+    "Exercise" -> ExerciseAccent
+    else -> DefaultAccent
 }

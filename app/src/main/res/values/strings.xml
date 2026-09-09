@@ -1,3 +1,93 @@
 <resources>
     <string name="app_name">Monitrack</string>
+
+    <!-- Navigation -->
+    <string name="nav_track">Track</string>
+    <string name="nav_progress">Progress</string>
+    <string name="nav_streaks">Streaks</string>
+    <string name="settings">Settings</string>
+    <string name="history">History</string>
+
+    <!-- Reminder notifications -->
+    <string name="reminder_channel_name">Activity reminders</string>
+    <string name="reminder_channel_description">Reminds you when an activity runs much longer than its target, or when you haven\'t met a daily goal.</string>
+    <string name="reminder_title">Still tracking %1$s?</string>
+    <string name="reminder_text">You\'ve been going for %1$s — did you forget to stop?</string>
+    <string name="reminder_action_stop">Stop now</string>
+    <string name="reminder_action_still_going">Still going</string>
+    <string name="nudge_title">Reach your %1$s goal</string>
+    <string name="nudge_text">You\'re at %1$s of your %2$s target today.</string>
+
+    <!-- Track carousel -->
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="cancel_session">Cancel</string>
+    <string name="target_label">Target %1$s</string>
+    <string name="today_progress">Today %1$s / %2$s</string>
+    <string name="streak_label">%1$d day streak</string>
+    <string name="manually_logged">Manually logged</string>
+    <string name="incomplete">Incomplete</string>
+
+    <!-- Adjust stop time dialog -->
+    <string name="adjust_stop_title">Stop %1$s</string>
+    <string name="adjust_stop_message">Adjust the stop time if needed. Editing it marks this session as manually logged.</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Cancel/discard session dialog -->
+    <string name="cancel_session_title">Discard this session?</string>
+    <string name="cancel_session_message">Nothing will be logged and this can\'t be undone.</string>
+    <string name="discard">Discard</string>
+    <string name="keep_tracking">Keep tracking</string>
+
+    <!-- Setup / Settings -->
+    <string name="setup_title">Set up Monitrack</string>
+    <string name="setup_intro">Set a target and behavior for each activity. You can change these anytime in Settings.</string>
+    <string name="setup_finish">Get started</string>
+    <string name="settings_title">Settings</string>
+    <string name="config_target">Target duration</string>
+    <string name="config_aggregates_daily">Sum multiple sessions per day</string>
+    <string name="config_requires_target">Only count as complete when target is met</string>
+    <string name="config_daily_nudge">Remind me if I miss the daily target</string>
+    <string name="config_nudge_time">Reminder time</string>
+    <string name="config_overrun">Remind me if I forget to stop</string>
+    <string name="config_streak">Track a streak</string>
+    <string name="config_streak_color">Streak color</string>
+    <string name="hours_label">Hours</string>
+    <string name="minutes_label">Minutes</string>
+    <string name="bodyfat_enable">Calculate body fat %</string>
+    <string name="bodyfat_privacy">Your profile is stored only on this device and is never uploaded.</string>
+    <string name="profile_sex">Sex</string>
+    <string name="sex_male">Male</string>
+    <string name="sex_female">Female</string>
+    <string name="profile_height">Height (cm)</string>
+    <string name="profile_dob">Date of birth</string>
+
+    <!-- History -->
+    <string name="history_title">%1$s history</string>
+    <string name="history_empty">No sessions logged yet.</string>
+
+    <!-- Streaks -->
+    <string name="streaks_empty">No activities have streaks enabled. Turn one on in Settings.</string>
+    <string name="streak_current">Current streak: %1$d days</string>
+
+    <!-- Progress screen -->
+    <string name="range_week">Week</string>
+    <string name="range_fortnight">Fortnight</string>
+    <string name="range_month">Month</string>
+    <string name="range_year">Year</string>
+    <string name="add_measurement">Add measurement</string>
+    <string name="chart_weight">Weight (kg)</string>
+    <string name="chart_body_fat">Body fat (%)</string>
+    <string name="chart_neck">Neck (cm)</string>
+    <string name="chart_waist">Waist (cm)</string>
+    <string name="chart_hip">Hip (cm)</string>
+    <string name="no_measurements">No measurements in this range yet.</string>
+    <string name="measurement_date">Date</string>
+    <string name="measurement_weight">Weight (kg)</string>
+    <string name="measurement_neck">Neck (cm)</string>
+    <string name="measurement_waist">Waist (cm)</string>
+    <string name="measurement_hip">Hip (cm)</string>
+    <string name="hip_required_female">Hip is required to calculate body fat for females.</string>
+    <string name="body_fat_computed">Body fat: %1$s%%</string>
 </resources>
